@@ -1,12 +1,13 @@
 from sqlalchemy import Column, create_engine, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, sessionmaker
 
 """
 https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
 """
 
-engine = create_engine("mysql://root:@localhost:3306/alexandria", echo=True)
+engine = create_engine("mysql://root:@localhost:3306/mysqlalchemy", echo=True)
+session = sessionmaker(bind=engine)
 Base = declarative_base()
 
 class Person(Base):
@@ -38,3 +39,6 @@ class PersonRole(Base):
     person = relationship("Person")
     role = relationship("Role")
     project = relationship("Project")
+
+role1 = Role(name="leader")
+role2 = Role(name="assistant leader")
