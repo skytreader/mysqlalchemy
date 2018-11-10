@@ -30,6 +30,7 @@ class Project(Base):
 class PersonRole(Base):
     __tablename__ = "person_roles"
 
+    id = Column(Integer, primary_key=True)
     person_id = Column(Integer, ForeignKey("persons.id", name="person_roles_person", ondelete="CASCADE"))
     role_id = Column(Integer, ForeignKey("roles.id", name="person_roles_role", ondelete="CASCADE"))
     project_id = Column(Integer, ForeignKey("projects.id", name="person_roles_project", ondelete="CASCADE"))
