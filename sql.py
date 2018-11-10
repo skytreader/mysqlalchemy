@@ -7,7 +7,7 @@ https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
 """
 
 engine = create_engine("mysql://root:@localhost:3306/mysqlalchemy", echo=True)
-session = sessionmaker(bind=engine)
+session = sessionmaker(bind=engine)()
 Base = declarative_base()
 
 class Person(Base):
@@ -42,3 +42,4 @@ class PersonRole(Base):
 
 role1 = Role(name="leader")
 role2 = Role(name="assistant leader")
+session.add_all((role1, role2))
