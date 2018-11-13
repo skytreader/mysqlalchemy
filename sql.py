@@ -2,11 +2,15 @@ from sqlalchemy import Column, create_engine, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 
+import os
+
 """
 https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
 """
 
-engine = create_engine("mysql://root:@localhost:3306/mysqlalchemy", echo=True)
+host = os.environ.get("MYSQLALCHEMY_HOST", "localhost")
+
+engine = create_engine("mysql://root:@%s:3306/mysqlalchemy" % host, echo=True)
 session = sessionmaker(bind=engine)()
 Base = declarative_base()
 
